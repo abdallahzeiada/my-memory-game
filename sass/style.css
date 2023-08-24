@@ -1,0 +1,218 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+  padding: 0 10px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: sans-serif;
+  position: relative;
+}
+body .start {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(105, 90, 205, 0.5647058824);
+  z-index: 99;
+}
+body .start .start-playing {
+  border: none;
+  background-color: slateblue;
+  box-shadow: 0 0 100px #222;
+  color: #fff;
+  padding: 20px 40px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  font-family: cursive;
+  text-transform: capitalize;
+  border-radius: 50px;
+  cursor: pointer;
+}
+body .end,
+body .win {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+body .end .game-over,
+body .win .game-over {
+  background-color: orangered;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 20%;
+  height: 20%;
+  gap: 20px;
+}
+body .end .game-over p,
+body .win .game-over p {
+  font-weight: bold;
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+body .end .game-over .try-again,
+body .win .game-over .try-again {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  line-height: 1;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: cursive;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+body .win .game-over {
+  background-color: slateblue;
+}
+body header {
+  box-shadow: 0 0 5px lightgray;
+  padding: 20px 0;
+}
+body header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body header .container h1 {
+  text-transform: capitalize;
+  font-family: cursive;
+  font-size: 22px;
+}
+body header .container h1 .name {
+  color: slateblue;
+}
+body header .container .time span {
+  font-weight: bold;
+  color: slateblue;
+}
+body header .container .wrong-tries {
+  text-transform: capitalize;
+  font-size: 16px;
+}
+body header .container .wrong-tries span {
+  color: slateblue;
+  font-weight: bold;
+}
+body main {
+  margin-top: 20px;
+}
+body main .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+body main .container .card {
+  border: 2px solid slateblue;
+  width: calc(20% - 10px);
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+body main .container .card .back {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+body main .container .card .back img {
+  width: 90%;
+  height: 90%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body main .container .card .front {
+  backface-visibility: hidden;
+  position: absolute;
+  background-color: #333;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main .container .card .front::after {
+  content: "?";
+  color: #fff;
+  font-size: 70px;
+  font-weight: bold;
+}
+body main .container .flipped {
+  transform: rotateY(180deg);
+}
+body main .container .match {
+  transform: rotateY(180deg);
+}
+body main .stop {
+  pointer-events: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    width: 65%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .container {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .container {
+    width: 90%;
+  }
+  .container .card {
+    height: 100px !important;
+  }
+}
+@media screen and (max-width: 575px) {
+  .container {
+    width: 100%;
+  }
+  .container .card {
+    width: calc(25% - 10px) !important;
+    height: 90px !important;
+  }
+}/*# sourceMappingURL=style.css.map */
