@@ -10,14 +10,13 @@
 .container {
   width: 90%;
   margin: auto;
-  padding: 0 10px;
+  padding: 0 15px;
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
   font-family: sans-serif;
   position: relative;
+  padding-top: 100px;
 }
 body .start {
   position: fixed;
@@ -29,7 +28,7 @@ body .start {
   align-items: center;
   justify-content: center;
   background-color: rgba(105, 90, 205, 0.5647058824);
-  z-index: 99;
+  z-index: 99999;
 }
 body .start .start-playing {
   border: none;
@@ -98,6 +97,12 @@ body .win .game-over {
 body header {
   box-shadow: 0 0 5px lightgray;
   padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: #fff;
 }
 body header .container {
   display: flex;
@@ -124,15 +129,23 @@ body header .container .wrong-tries span {
   color: slateblue;
   font-weight: bold;
 }
-body main {
-  margin-top: 20px;
-}
-body main .container {
+body .game {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
 }
-body main .container .card {
+body .game main {
+  flex: 1;
+  background-color: #fff;
+}
+body .game main .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100% !important;
+}
+body .game main .container .card {
   border: 2px solid slateblue;
   width: calc(20% - 10px);
   height: 120px;
@@ -141,7 +154,7 @@ body main .container .card {
   transition: transform 0.5s;
   cursor: pointer;
 }
-body main .container .card .back {
+body .game main .container .card .back {
   width: 100%;
   height: 100%;
   display: flex;
@@ -150,13 +163,13 @@ body main .container .card .back {
   transform: rotateY(180deg);
   backface-visibility: hidden;
 }
-body main .container .card .back img {
+body .game main .container .card .back img {
   width: 90%;
   height: 90%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-body main .container .card .front {
+body .game main .container .card .front {
   backface-visibility: hidden;
   position: absolute;
   background-color: #333;
@@ -168,51 +181,95 @@ body main .container .card .front {
   align-items: center;
   justify-content: center;
 }
-body main .container .card .front::after {
+body .game main .container .card .front::after {
   content: "?";
   color: #fff;
   font-size: 70px;
   font-weight: bold;
 }
-body main .container .flipped {
+body .game main .container .flipped {
   transform: rotateY(180deg);
 }
-body main .container .match {
+body .game main .container .match {
   transform: rotateY(180deg);
 }
-body main .stop {
+body .game main .stop {
   pointer-events: none;
+}
+body .game footer {
+  flex: 1;
+}
+body .game footer .container {
+  width: 100% !important;
+}
+body .game footer .container table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+body .game footer .container table thead tr th {
+  text-transform: capitalize;
+  padding: 5px 0;
+  border-bottom: 2px solid slateblue;
+}
+body .game footer .container table tbody tr td {
+  padding: 5px 0;
+}
+body .game footer .container table tbody tr td .plaer-name {
+  text-transform: capitalize;
+}
+body .game footer .container table tbody tr td .del {
+  border: none;
+  color: #fff;
+  background-color: slateblue;
+  padding: 10px;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1200px) {
   .container {
-    width: 50%;
+    width: 50% !important;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .container {
-    width: 65%;
+    width: 65% !important;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .container {
-    width: 80%;
+    width: 80% !important;
+  }
+  .container .card {
+    width: calc(25% - 10px) !important;
+    height: 100px !important;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 767px) {
   .container {
-    width: 90%;
+    width: 90% !important;
   }
   .container .card {
     height: 100px !important;
   }
+  .game {
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 575px) {
   .container {
-    width: 100%;
+    width: 100% !important;
   }
   .container .card {
     width: calc(25% - 10px) !important;
-    height: 90px !important;
+    height: 80px !important;
+  }
+  .game {
+    flex-direction: column;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -15,7 +15,6 @@ let imgs = [
     name: "html",
     src: "imgs/html.jpg",
   },
-  ,
   {
     name: "react",
     src: "imgs/react.jpg",
@@ -57,6 +56,14 @@ let mistakes = document.querySelector(".mistakes");
 let _audio = document.querySelector("audio");
 let counter;
 let timeContainer = document.querySelector(".time span");
+let cardsContainer = document.querySelector("main .container");
+let scoreArray;
+if (localStorage.getItem("score") !== null) {
+  scoreArray = JSON.parse(localStorage.getItem("score"));
+  addToTbody();
+} else {
+  scoreArray = [];
+}
 start(document.querySelector(".start-playing"));
 formatTime(time);
 function start(btn) {
@@ -78,9 +85,6 @@ function start(btn) {
     }, 1000);
   });
 }
-
-let cardsContainer = document.querySelector("main .container");
-
 function createCards(imgsArray) {
   imgsArray.forEach((img) => {
     let card = `<div class="card" data-tech="${img.name}">
@@ -145,8 +149,10 @@ function flip(card) {
     } else {
       correctCounter++;
       console.log(correctCounter);
-      if (correctCounter === imgs.length - 1) {
+      if (correctCounter === imgs.length ) {
         winner();
+        createObj(scoreArray);
+        addToTbody();
       } else {
         _audio.src = audio.correct;
         fisrtCard.classList.remove("flipped");
@@ -169,6 +175,7 @@ function formatTime(time) {
   sec = sec < 10 ? `0${sec}` : sec;
   timeContainer.innerHTML = `${min}:${sec}`;
 }
+
 function endGame() {
   let end = document.querySelector(".end");
   end.style.display = "flex";
@@ -177,13 +184,13 @@ function endGame() {
   _audio.play();
 }
 
-async function winner() {
+function winner() {
   clearInterval(counter);
   let end = document.querySelector(".win");
   end.style.display = "flex";
   cardsContainer.classList.add("stop");
   _audio.src = audio.win;
-  await _audio.play();
+  _audio.play();
 }
 
 document.querySelector(".loser").onclick = () => {
@@ -192,3 +199,41 @@ document.querySelector(".loser").onclick = () => {
 document.querySelector(".winner").onclick = () => {
   location.reload();
 };
+
+function formatEndTime(time) {
+  let min = Math.trunc(time / 60);
+  let sec = time % 60;
+  min = min < 10 ? `0${min}` : min;
+  sec = sec < 10 ? `0${sec}` : sec;
+  return `${min}:${sec}`;
+}
+function createObj(scoreArray) {
+  let endTime = formatEndTime(mainTime - time);
+  let obj = {
+    name: `${name}` || "unknown",
+    time: `${endTime}`,
+    mistakes: `${mistakes.innerHTML}`,
+  };
+  scoreArray.push(obj);
+  localStorage.setItem("score", JSON.stringify(scoreArray));
+}
+function fillLeaderboard(obj) {
+  let tr = `<tr>
+  <td><h3 class="plaer-name">${obj.name}</h3></td>
+  <td><p class="player-time">${obj.time}</p></td>
+  <td>
+    <p class="player-mistakes">${obj.mistakes}</p>
+  </td>
+</tr>`;
+  document.querySelector("tbody").innerHTML += tr;
+}
+
+function addToTbody() {
+  document.querySelector("tbody").innerHTML = "";
+  let localArray = JSON.parse(localStorage.getItem("score"));
+  localArray.forEach((ele) => {
+    fillLeaderboard(ele);
+  });
+}
+
+// localStorage.clear();
